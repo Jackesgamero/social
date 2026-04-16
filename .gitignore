@@ -1,0 +1,23 @@
+# Binarios y ejecutables
+bin/
+main
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+.env
+.envrc
+.direnv/
+
+# Logs de Air y errores
+build-errors.log
+tmp/
+
+# Dependencias 
+# vendor/
+
+# macOS
+.DS_Store
+

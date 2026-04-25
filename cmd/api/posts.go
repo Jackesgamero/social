@@ -20,6 +20,11 @@ type CreatePostPayload struct {
 	Tags    []string `json:"tags"`
 }
 
+type CreateCommentPayload struct {
+	Content string `json:"content"`
+	UserID  int64  `json:"user_id"`
+}
+
 func (app *application) createPostHandler(w http.ResponseWriter, r *http.Request) {
 	var payload CreatePostPayload
 	if err := readJSON(w, r, &payload); err != nil {
@@ -157,4 +162,30 @@ func (app *application) postContextMiddleware(next http.Handler) http.Handler {
 func getPostFromCtx(r *http.Request) *store.Post {
 	post, _ := r.Context().Value(postCtx).(*store.Post)
 	return post
+}
+
+func (app *application) createCommentHandler(w http.ResponseWriter, r *http.Request) {
+	post := getPostFromCtx(r)
+
+	var payload CreateCommentPayload
+	if err := readJSON(w, r, &payload); err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	comment := &store.Comment{
+		PostID:  post.ID,
+		UserID:  payload.UserID,
+		Content: payload.Content,
+	}
+
+	ctx := r.Context()
+	if err := app.store.Comments.Create(ctx, comment); err != nil {
+		app.internalServerError(w, r, err)
+		return
+	}
+
+	if err := writeJSON(w, http.StatusCreated, comment); err != nil {
+		app.internalServerError(w, r, err)
+	}
 }

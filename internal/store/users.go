@@ -46,6 +46,10 @@ func (p *password) Set(text string) error {
 	return nil
 }
 
+func (p *password) Compare(plainText string) error {
+	return bcrypt.CompareHashAndPassword(p.hash, []byte(plainText))
+}
+
 func (s *UserStore) GetByID(ctx context.Context, userID int64) (*User, error) {
 	query := `
 	  SELECT id, username, email, password, created_at

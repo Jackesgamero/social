@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"github.com/jackesgamero/social/internal/auth"
 	"github.com/jackesgamero/social/internal/db"
 	"github.com/jackesgamero/social/internal/env"
 	"github.com/jackesgamero/social/internal/mailer"
@@ -51,6 +52,17 @@ func main() {
 				apiKey: env.GetString("MAILTRAP_API_KEY", ""),
 			},
 		},
+		auth: authConfig{
+			basic: basicConfig{
+				user: env.GetString("AUTH_BASIC_USER", ""),
+				pass: env.GetString("AUTH_BASIC_PASS", ""),
+			},
+			token: tokenConfig{
+				secret: env.GetString("AUTH_TOKEN_SECRET", ""),
+				exp:    time.Hour * 24 * 3,
+				iss:    "social",
+			},
+		},
 	}
 
 	// Logger
@@ -80,11 +92,18 @@ func main() {
 	//	logger.Fatal(err)
 	//}
 
+	jwtAuthenticator := auth.NewJWTAuthenticator(
+		cfg.auth.token.secret,
+		cfg.auth.token.iss,
+		cfg.auth.token.iss,
+	)
+
 	app := &application{
-		config: cfg,
-		store:  store,
-		logger: logger,
-		mailer: mailer,
+		config:        cfg,
+		store:         store,
+		logger:        logger,
+		mailer:        mailer,
+		authenticator: jwtAuthenticator,
 	}
 
 	mux := app.mount()

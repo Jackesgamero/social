@@ -15,6 +15,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/jackesgamero/social/docs"
 	"github.com/jackesgamero/social/internal/auth"
+	"github.com/jackesgamero/social/internal/env"
 	"github.com/jackesgamero/social/internal/mailer"
 	"github.com/jackesgamero/social/internal/ratelimiter"
 	"github.com/jackesgamero/social/internal/store"
@@ -94,7 +95,8 @@ func (app *application) mount() http.Handler {
 	r := chi.NewRouter()
 
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"https://*", "http://*"},
+		//AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedOrigins:   []string{env.GetString("CORS_ALLOWED_ORIGIN", "http://localhost:5173")},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},

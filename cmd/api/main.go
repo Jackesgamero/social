@@ -8,6 +8,7 @@ import (
 	"github.com/jackesgamero/social/internal/db"
 	"github.com/jackesgamero/social/internal/env"
 	"github.com/jackesgamero/social/internal/mailer"
+	"github.com/jackesgamero/social/internal/ratelimiter"
 	"github.com/jackesgamero/social/internal/store"
 	"github.com/jackesgamero/social/internal/store/cache"
 	"go.uber.org/zap"
@@ -71,6 +72,11 @@ func main() {
 				iss:    "social",
 			},
 		},
+		rateLimiter: ratelimiter.Config{
+			RequestsPerTimeFrame: env.GetInt("RATELIMITER_REQUESTS_COUNT", 20),
+			TimeFrame:            time.Second * 5,
+			Enabled:              env.GetBool("RATE_LIMITER_ENABLED", true),
+		},
 	}
 
 	// Logger
@@ -98,6 +104,12 @@ func main() {
 		logger.Info("redis cache connection pool established")
 	}
 
+	// Rate limiter
+	rateLimiter := ratelimiter.NewFixedWindowLimiter(
+		cfg.rateLimiter.RequestsPerTimeFrame,
+		cfg.rateLimiter.TimeFrame,
+	)
+
 	store := store.NewStorage(db)
 	cacheStorage := cache.NewRedisStorage(rdb)
 
@@ -121,6 +133,7 @@ func main() {
 		logger:        logger,
 		mailer:        mailer,
 		authenticator: jwtAuthenticator,
+		rateLimiter:   rateLimiter,
 	}
 
 	mux := app.mount()

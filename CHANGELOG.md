@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/Jackesgamero/social/compare/v1.1.0...v1.2.0) (2026-05-05)
+
+
+### Features
+
+* dockerfile ([0a4f997](https://github.com/Jackesgamero/social/commit/0a4f9971f40349c59e7d2b320d619ef424d1f86f))
+
+
+### Bug Fixes
+
+* Dockerfile ([029cb62](https://github.com/Jackesgamero/social/commit/029cb6200697e45f895a837aa999ff2212a606f8))
+
 ## [1.1.0](https://github.com/Jackesgamero/social/compare/v1.0.0...v1.1.0) (2026-05-05)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Jackesgamero/social/compare/v1.0.0...v1.1.0) (2026-05-05)
+
+
+### Features
+
+* update api version automatically ([3a98737](https://github.com/Jackesgamero/social/commit/3a987377754b08b81f4023649ae24dd184a8f814))
+
 ## 1.0.0 (2026-05-05)
 
 

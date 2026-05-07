@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Jackesgamero/social/compare/v1.2.0...v1.3.0) (2026-05-06)
+
+
+### Features
+
+* create README.MD ([38cf92b](https://github.com/Jackesgamero/social/commit/38cf92b3d1251c2e362ead2963af1bae17d118f4))
+
 ## [1.2.0](https://github.com/Jackesgamero/social/compare/v1.1.0...v1.2.0) (2026-05-05)
 
 

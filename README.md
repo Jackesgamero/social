@@ -1,11 +1,11 @@
 # Go Social Media Backend
 
-A high-performance REST API built with **Go** and **PostgreSQL**, designed for scalability and deployed on **Google Cloud**.
+A REST API built with **Go** and **PostgreSQL**, designed for scalability and deployed on **Google Cloud**.
 
 ---
 
 ## 📌 Overview
-This project is a production-grade social media backend developed with a focus on **system design, performance, and reliability**. Moving beyond standard tutorials, it implements a composable architecture and a fully automated CI/CD pipeline, handling everything from low-level networking foundations to cloud-scale deployment.
+This project is a production-grade social media backend developed with a focus on **system design, performance, and reliability**. It implements a composable architecture and a fully automated CI/CD pipeline, handling everything from low-level networking foundations to cloud-scale deployment.
 
 ## 🛠 Tech Stack
 *   **Language:** Go (Standard Library focus)

@@ -12,7 +12,7 @@ This project is a production-grade social media backend developed with a focus o
 *   **Database:** PostgreSQL
 *   **Infrastructure:** Google Cloud (GCP)
 *   **DevOps:** GitHub Actions (CI/CD), Docker
-*   **Tools:** Migrations, JWT Auth, Middleware patterns
+*   **Tools:** Redis, Gin
 
 ## 🏗 Key Engineering Concepts
 *   **Composable Architecture:** Modular design utilizing Go interfaces to ensure the system is maintainable, testable, and loosely coupled.
